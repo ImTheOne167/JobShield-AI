@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us | JobShield AI</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Bootstrap Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Our CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+        <div class="logo-section">
+
+            <div class="shield-logo">
+                <i class="bi bi-shield-check"></i>
+            </div>
+
+            <div>
+                <h2>JobShield <span>AI</span></h2>
+                <p>Fake Job Offer Detection & Verification Platform</p>
+            </div>
+
+        </div>
+
+        <hr>
+
+        <nav class="sidebar-menu">
+
+            <a href="/" class="menu-item">
+                <i class="bi bi-grid"></i>
+                <span>Dashboard</span>
+            </a>
+
+            <a href="/analyze-page" class="menu-item">
+                <i class="bi bi-search"></i>
+                <span>Analyze Job</span>
+            </a>
+
+            <a href="/my-analyses" class="menu-item">
+                <i class="bi bi-file-earmark-text"></i>
+                <span>My Analyses</span>
+            </a>
+
+            <a href="/recruiter-verify" class="menu-item">
+                <i class="bi bi-person-check"></i>
+                <span>Recruiter Verify</span>
+            </a>
+
+            <a href="/knowledge-base" class="menu-item">
+                <i class="bi bi-book"></i>
+                <span>Knowledge Base</span>
+            </a>
+
+            <a href="/about" class="menu-item active">
+                <i class="bi bi-info-circle"></i>
+                <span>About Us</span>
+            </a>
+
+        </nav>
+
+
+        <!-- Safety Box -->
+
+        <div class="safety-box">
+
+            <i class="bi bi-shield-check safety-icon"></i>
+
+            <h5>Stay Safe. Stay Informed.</h5>
+
+            <p>
+                AI-powered protection from fake job scams.
+            </p>
+
+        </div>
+
+    </aside>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+        <!-- Top Bar -->
+
+        <header class="topbar">
+
+            <div></div>
+
+            <div class="top-right">
+
+                <i class="bi bi-brightness-high"></i>
+
+                <span>
+                    <i class="bi bi-person-circle"></i>
+                    Guest User
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <!-- Page Content -->
+
+        <div class="content">
+
+
+            <!-- ================= HERO ================= -->
+
+            <section class="welcome-card">
+
+                <div class="welcome-text">
+
+                    <h1>
+                        About <span>JobShield AI</span>
+                    </h1>
+
+                    <p>
+                        A smart platform designed to help job seekers
+                        identify suspicious job opportunities and stay
+                        protected from recruitment scams.
+                    </p>
+
+                </div>
+
+                <div class="welcome-icon">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= MISSION ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-bullseye"></i>
+
+                    <div>
+
+                        <h3>Our Mission</h3>
+
+                        <p>
+                            Making online job searching safer and smarter.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p>
+                    Finding a job online has become easier than ever,
+                    but unfortunately, fake job advertisements and
+                    recruitment scams have also increased.
+                </p>
+
+                <p>
+                    JobShield AI was created to help students,
+                    fresh graduates and job seekers identify potential
+                    warning signs before trusting a job opportunity.
+                </p>
+
+                <p>
+                    Our goal is simple:
+                    <strong>help people make safer and more informed
+                    decisions during their job search.</strong>
+                </p>
+
+            </section>
+
+
+            <!-- ================= WHY JOBSHIELD ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-shield-check"></i>
+
+                    <div>
+
+                        <h3>Why JobShield AI?</h3>
+
+                        <p>
+                            Because every job opportunity deserves a closer look.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon blue-icon">
+
+                        <i class="bi bi-search"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Detect Suspicious Signals</h5>
+
+                        <p>
+                            The system looks for warning signs such as
+                            suspicious keywords, free email services,
+                            missing websites and other unusual information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon green-icon">
+
+                        <i class="bi bi-bar-chart"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Calculate Risk</h5>
+
+                        <p>
+                            Detected warning signs are used to calculate
+                            an overall risk score for the submitted job.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon orange-icon">
+
+                        <i class="bi bi-lightbulb"></i>
+
+                    </div>
+
+                    <div>
+
+                        <h5>Explain the Result</h5>
+
+                        <p>
+                            Instead of simply showing a result, JobShield AI
+                            provides reasons explaining why an opportunity
+                            may require additional caution.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= HOW IT WORKS ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-diagram-3"></i>
+
+                    <div>
+
+                        <h3>How JobShield AI Works</h3>
+
+                        <p>
+                            A simple process from job information to risk assessment.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon blue-icon">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>1. Submit Job Information</h5>
+
+                        <p>
+                            The user enters details such as job title,
+                            company name, recruiter email, salary,
+                            website, location and job description.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon green-icon">
+                        <i class="bi bi-cpu"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>2. Analyze the Information</h5>
+
+                        <p>
+                            JobShield AI examines the submitted information
+                            for potential fraud indicators and suspicious patterns.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon orange-icon">
+                        <i class="bi bi-speedometer2"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>3. Generate Risk Score</h5>
+
+                        <p>
+                            The detected indicators contribute to a risk score
+                            between 0 and 100.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon blue-icon">
+                        <i class="bi bi-check-circle"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>4. Display the Result</h5>
+
+                        <p>
+                            The opportunity is categorized as
+                            Genuine, Suspicious or Fake based on the
+                            current risk assessment system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= TECHNOLOGY ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-code-slash"></i>
+
+                    <div>
+
+                        <h3>Technology Behind JobShield AI</h3>
+
+                        <p>
+                            Technologies used to build the platform.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon blue-icon">
+                        <i class="bi bi-filetype-html"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>HTML, CSS & JavaScript</h5>
+
+                        <p>
+                            Used to create the interactive and responsive
+                            user interface.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon green-icon">
+                        <i class="bi bi-bootstrap"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Bootstrap</h5>
+
+                        <p>
+                            Used for responsive layouts, components
+                            and icons.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon orange-icon">
+                        <i class="bi bi-filetype-py"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>Python & Flask</h5>
+
+                        <p>
+                            Flask handles the backend logic and communication
+                            between the webpage and the analysis system.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-icon blue-icon">
+                        <i class="bi bi-database"></i>
+                    </div>
+
+                    <div>
+
+                        <h5>SQLite</h5>
+
+                        <p>
+                            Used to store job analysis records and
+                            related information.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= CURRENT SYSTEM ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-robot"></i>
+
+                    <div>
+
+                        <h3>Our Detection Approach</h3>
+
+                        <p>
+                            Transparent and explainable risk assessment.
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <p>
+                    The current version of JobShield AI uses a
+                    <strong>rule-based risk assessment approach</strong>.
+                    It checks submitted job information for predefined
+                    warning signs and suspicious keywords.
+                </p>
+
+                <p>
+                    Each detected indicator contributes points to the
+                    overall risk score. The final score is then used
+                    to classify the job opportunity.
+                </p>
+
+
+                <div class="info-box">
+
+                    <i class="bi bi-info-circle"></i>
+
+                    <span>
+                        Future versions can incorporate machine learning
+                        and natural language processing techniques to
+                        improve automated fake-job detection.
+                    </span>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= FUTURE SCOPE ================= -->
+
+            <section class="analysis-card" style="margin-top: 25px;">
+
+                <div class="section-title">
+
+                    <i class="bi bi-rocket-takeoff"></i>
+
+                    <div>
+
+                        <h3>Future Scope</h3>
+
+                        <p>
+                            Where JobShield AI can go next.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <ul>
+
+                    <li>
+                        Machine learning based fake job detection.
+                    </li>
+
+                    <li>
+                        Natural Language Processing for job descriptions.
+                    </li>
+
+                    <li>
+                        Improved recruiter and company verification.
+                    </li>
+
+                    <li>
+                        Integration with trusted company information.
+                    </li>
+
+                    <li>
+                        Advanced analytics and reporting.
+                    </li>
+
+                    <li>
+                        Public cloud deployment.
+                    </li>
+
+                    <li>
+                        Mobile-friendly experience.
+                    </li>
+
+                </ul>
+
+            </section>
+
+
+            <!-- ================= DISCLAIMER ================= -->
+
+            <section class="info-box" style="margin-top: 25px;">
+
+                <i class="bi bi-exclamation-triangle"></i>
+
+                <div>
+
+                    <strong>Important Disclaimer</strong>
+
+                    <p style="margin-top: 8px; margin-bottom: 0;">
+
+                        JobShield AI provides a technology-based risk
+                        assessment and educational guidance. A result
+                        should not be considered absolute proof that a
+                        job opportunity or recruiter is genuine or fraudulent.
+                        Users should independently verify important
+                        employment information before sharing personal
+                        information or making payments.
+
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ================= BACK BUTTON ================= -->
+
+            <div style="text-align: center; margin-top: 30px;">
+
+                <a href="/" class="analyze-button"
+                   style="display: inline-block; text-decoration: none;">
+
+                    <i class="bi bi-arrow-left"></i>
+                    Back to Dashboard
+
+                </a>
+
+            </div>
+
+
+            <!-- ================= FOOTER ================= -->
+
+            <footer>
+
+                © 2026 JobShield AI. All rights reserved.
+
+            </footer>
+
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>JobShield AI - Dashboard</title>
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Icons -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <!-- Custom CSS -->
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+
+</head>
+
+
+<body>
+
+
+<div class="app-container">
+
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <aside class="sidebar">
+
+
+        <div class="logo-section">
+
+            <div class="shield-logo">
+                <i class="bi bi-shield-check"></i>
+            </div>
+
+            <div>
+
+                <h2>
+                    JobShield <span>AI</span>
+                </h2>
+
+                <p>
+                    Fake Job Offer Detection & Verification Platform
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <hr>
+
+
+        <nav class="sidebar-menu">
+
+
+            <!-- Dashboard -->
+
+            <a href="/" class="menu-item active">
+
+                <i class="bi bi-grid"></i>
+
+                Dashboard
+
+            </a>
+
+
+            <!-- Analyze Job -->
+
+            <a
+                href="{{ url_for('analyze_job_page') }}"
+                class="menu-item"
+            >
+
+                <i class="bi bi-search"></i>
+
+                Analyze Job
+
+            </a>
+
+
+            <!-- My Analyses -->
+
+            <a
+                href="{{ url_for('my_analyses') }}"
+                class="menu-item"
+            >
+
+                <i class="bi bi-file-earmark-text"></i>
+
+                My Analyses
+
+            </a>
+
+
+            <!-- Recruiter Verify -->
+
+            <a
+                href="{{ url_for('recruiter_verify') }}"
+                class="menu-item"
+            >
+
+                <i class="bi bi-person-check"></i>
+
+                Recruiter Verify
+
+            </a>
+
+
+            <!-- Knowledge Base -->
+
+            <a
+                href="{{ url_for('knowledge_base') }}"
+                class="menu-item"
+            >
+
+                <i class="bi bi-book"></i>
+
+                Knowledge Base
+
+            </a>
+
+
+            <!-- About -->
+
+            <a
+                href="{{ url_for('about') }}"
+                class="menu-item"
+            >
+
+                <i class="bi bi-info-circle"></i>
+
+                About Us
+
+            </a>
+
+
+        </nav>
+
+
+        <!-- SAFETY BOX -->
+
+        <div class="safety-box">
+
+            <i class="bi bi-shield-check safety-icon"></i>
+
+            <h5>
+                Stay Safe. Stay Informed.
+            </h5>
+
+            <p>
+                AI-powered protection from fake job scams.
+            </p>
+
+        </div>
+
+
+    </aside>
+
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <main class="main-content">
+
+
+        <!-- TOP BAR -->
+
+        <header class="topbar">
+
+
+            <button class="menu-button">
+
+                <i class="bi bi-list"></i>
+
+            </button>
+
+
+            <div class="top-right">
+
+                <i class="bi bi-brightness-high"></i>
+
+                <span>
+
+                    <i class="bi bi-person-circle"></i>
+
+                    Guest User
+
+                </span>
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- ================= CONTENT ================= -->
+
+        <div class="content">
+
+
+            <!-- ================= WELCOME ================= -->
+
+            <section class="welcome-card">
+
+
+                <div class="welcome-text">
+
+
+                    <h1>
+
+                        Welcome to
+                        <span>JobShield AI</span>
+
+                    </h1>
+
+
+                    <p>
+
+                        A smart recruitment safety platform designed to
+                        identify suspicious job advertisements, analyze
+                        recruitment risks, and help users avoid fake job scams.
+
+                    </p>
+
+
+                    <p>
+
+                        Analyze job information, verify recruiters,
+                        and review your previous analysis from the
+                        navigation menu.
+
+                    </p>
+
+
+                </div>
+
+
+                <div class="welcome-icon">
+
+
+                    <i class="bi bi-file-earmark-person"></i>
+
+
+                    <div class="big-shield">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= STATISTICS ================= -->
+
+            <section class="statistics">
+
+
+                <!-- JOBS ANALYZED -->
+
+                <div class="stat-card blue">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-file-earmark-text"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Jobs Analyzed
+                        </p>
+
+                        <h2>
+                            {{ jobs_analyzed }}
+                        </h2>
+
+                        <small>
+                            Total job offers analyzed
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SAFE -->
+
+                <div class="stat-card green">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-shield-check"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Safe Jobs
+                        </p>
+
+                        <h2>
+                            {{ safe_jobs }}
+                        </h2>
+
+                        <small>
+                            Marked as Genuine
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- SUSPICIOUS -->
+
+                <div class="stat-card orange">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-exclamation-triangle"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Suspicious Jobs
+                        </p>
+
+                        <h2>
+                            {{ suspicious_jobs }}
+                        </h2>
+
+                        <small>
+                            Require verification
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <!-- FAKE -->
+
+                <div class="stat-card red">
+
+
+                    <div class="stat-icon">
+
+                        <i class="bi bi-x-circle"></i>
+
+                    </div>
+
+
+                    <div>
+
+                        <p>
+                            Fake Jobs
+                        </p>
+
+                        <h2>
+                            {{ fake_jobs }}
+                        </h2>
+
+                        <small>
+                            High-risk job offers
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= DETECTION SUMMARY ================= -->
+
+            <section class="analysis-card mt-4">
+
+
+                <div class="section-title">
+
+                    <i class="bi bi-bar-chart-line"></i>
+
+                    <div>
+
+                        <h3>
+                            Detection Summary
+                        </h3>
+
+                        <p>
+                            Current distribution of analyzed job offers.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4 mt-2">
+
+
+                    <!-- GENUINE -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    Genuine
+                                </strong>
+
+                                <span>
+                                    {{ safe_jobs }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress mt-2"
+                                 style="height: 10px;">
+
+                                <div
+                                    class="progress-bar bg-success"
+                                    role="progressbar"
+                                    style="width:
+                                    {% if jobs_analyzed > 0 %}
+                                        {{ (safe_jobs / jobs_analyzed * 100)|round(0) }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}"
+                                >
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- SUSPICIOUS -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    Suspicious
+                                </strong>
+
+                                <span>
+                                    {{ suspicious_jobs }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress mt-2"
+                                 style="height: 10px;">
+
+                                <div
+                                    class="progress-bar bg-warning"
+                                    role="progressbar"
+                                    style="width:
+                                    {% if jobs_analyzed > 0 %}
+                                        {{ (suspicious_jobs / jobs_analyzed * 100)|round(0) }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}"
+                                >
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FAKE -->
+
+                    <div class="col-md-4">
+
+                        <div class="p-3 border rounded">
+
+
+                            <div class="d-flex justify-content-between">
+
+                                <strong>
+                                    Fake
+                                </strong>
+
+                                <span>
+                                    {{ fake_jobs }}
+                                </span>
+
+                            </div>
+
+
+                            <div class="progress mt-2">
+
+                                <div
+                                    class="progress-bar bg-danger"
+                                    role="progressbar"
+                                    style="width:
+                                    {% if jobs_analyzed > 0 %}
+                                        {{ (fake_jobs / jobs_analyzed * 100)|round(0) }}%
+                                    {% else %}
+                                        0%
+                                    {% endif %}"
+                                >
+                                </div>
+
+                            </div>
+
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= HOW IT PROTECTS ================= -->
+
+            <section class="analysis-card mt-4">
+
+
+                <div class="section-title">
+
+                    <i class="bi bi-shield-lock"></i>
+
+                    <div>
+
+                        <h3>
+                            How JobShield AI Protects You
+                        </h3>
+
+                        <p>
+                            Multiple checks help identify common recruitment fraud indicators.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="row g-4 mt-2">
+
+
+                    <!-- STEP 1 -->
+
+                    <div class="col-md-4">
+
+                        <div class="how-card">
+
+                            <div class="step-icon blue-icon">
+
+                                <i class="bi bi-search"></i>
+
+                            </div>
+
+                            <h4>
+                                Analyze
+                            </h4>
+
+                            <p>
+                                Examine job details, recruiter information,
+                                salary and other submitted information.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 2 -->
+
+                    <div class="col-md-4">
+
+                        <div class="how-card">
+
+                            <div class="step-icon orange-icon">
+
+                                <i class="bi bi-exclamation-diamond"></i>
+
+                            </div>
+
+                            <h4>
+                                Detect Risks
+                            </h4>
+
+                            <p>
+                                Identify suspicious keywords, free email
+                                addresses and other warning indicators.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- STEP 3 -->
+
+                    <div class="col-md-4">
+
+                        <div class="how-card">
+
+                            <div class="step-icon green-icon">
+
+                                <i class="bi bi-shield-check"></i>
+
+                            </div>
+
+                            <h4>
+                                Make Safer Decisions
+                            </h4>
+
+                            <p>
+                                Use the generated risk score and reasons
+                                to decide whether further verification is needed.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= SECURITY TIP ================= -->
+
+            <section class="info-box mt-4">
+
+
+                <i class="bi bi-info-circle"></i>
+
+
+                <div>
+
+                    <strong>
+                        Security Tip
+                    </strong>
+
+                    <p>
+                        Never pay registration fees, security deposits or
+                        processing charges to receive a job. Genuine employers
+                        generally do not ask candidates to pay money to secure employment.
+                    </p>
+
+                </div>
+
+
+            </section>
+
+
+
+            <!-- ================= FOOTER ================= -->
+
+            <footer>
+
+                © 2026 JobShield AI. All rights reserved.
+
+            </footer>
+
+
+        </div>
+
+
+    </main>
+
+
+</div>
+
+
+
+<!-- JAVASCRIPT -->
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Analyses - JobShield AI</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h3>My Analyses</h3>
+            </div>
+
+            <div class="top-right">
+                <span>
+                    <i class="bi bi-person-circle"></i>
+                    Guest User
+                </span>
+            </div>
+
+        </header>
+
+        <div class="content">
+
+            <section class="welcome-card">
+
+                <div class="welcome-text">
+
+                    <h1>
+                        <span>My Job Analyses</span>
+                    </h1>
+
+                    <p>
+                        View your previous job offer analysis results
+                        and review their fraud risk scores.
+                    </p>
+
+                    <a href="/" class="btn-primary-custom">
+                        <i class="bi bi-arrow-left"></i>
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+                <div class="welcome-icon">
+
+                    <div class="big-shield">
+                        <i class="bi bi-file-earmark-text"></i>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="analysis-card">
+
+                <div class="section-title">
+
+                    <i class="bi bi-clock-history"></i>
+
+                    <div>
+
+                        <h3>Analysis History</h3>
+
+                        <p>
+                            Your analyzed job offers will appear here.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {% if analyses %}
+
+                    {% for analysis in analyses %}
+
+                    <div class="analysis-history-item">
+
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+
+                            <div>
+
+                                <h4>
+                                    {{ analysis.job_title }}
+                                </h4>
+
+                                <p class="mb-0">
+                                    <strong>Company:</strong>
+                                    {{ analysis.company_name }}
+                                </p>
+
+                            </div>
+
+
+                            {% if analysis.prediction == "Fake" %}
+
+                                <span class="badge bg-danger">
+                                    Fake
+
+                                </span>
+
+                            {% elif analysis.prediction == "Suspicious" %}
+
+                                <span class="badge bg-warning text-dark">
+                                    Suspicious
+
+                                </span>
+
+                            {% else %}
+
+                                <span class="badge bg-success">
+                                    Genuine
+
+                                </span>
+
+                            {% endif %}
+
+                        </div>
+
+
+                        <hr>
+
+
+                        <p>
+                            <strong>Fraud Risk Score:</strong>
+
+                            {{ analysis.risk_score }}%
+                        </p>
+
+
+                        <p>
+                            <strong>Recruiter Email:</strong>
+
+                            {{ analysis.recruiter_email }}
+                        </p>
+
+
+                        <p>
+                            <strong>Salary:</strong>
+
+                            {{ analysis.salary }}
+                        </p>
+
+
+                        <p>
+                            <strong>Location:</strong>
+
+                            {{ analysis.location }}
+                        </p>
+
+
+                        {% if analysis.website %}
+
+                        <p>
+                            <strong>Website:</strong>
+
+                            {{ analysis.website }}
+                        </p>
+
+                        {% endif %}
+
+
+                        {% if analysis.reasons %}
+
+                        <div>
+
+                            <strong>Reasons:</strong>
+
+                            <ul>
+
+                                {% for reason in analysis.reasons %}
+
+                                <li>
+                                    {{ reason }}
+                                </li>
+
+                                {% endfor %}
+
+                            </ul>
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                    {% endfor %}
+
+
+                {% else %}
+
+
+                    <div class="text-center p-5">
+
+                        <i
+                            class="bi bi-folder2-open"
+                            style="font-size: 50px;"
+                        ></i>
+
+                        <h4 class="mt-3">
+                            No Analyses Yet
+                        </h4>
+
+                        <p>
+                            Analyze a job offer to see your results here.
+                        </p>
+
+                        <a
+                            href="{{ url_for('analyze_job_page') }}"
+                            class="btn-primary-custom"
+                        >
+
+                            <i class="bi bi-search"></i>
+
+                            Analyze a Job
+
+                        </a>
+
+                    </div>
+
+
+                {% endif %}
+
+            </section>
+
+
+            <footer>
+
+                © 2026 JobShield AI. All rights reserved.
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+</body>
+</html>

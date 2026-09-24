@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Analyze Job - JobShield AI</title>
+
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="app-container">
+
+    <main class="main-content">
+
+        <header class="topbar">
+
+            <div>
+                <h3>Analyze Job Offer</h3>
+            </div>
+
+            <div class="top-right">
+
+                <span>
+                    <i class="bi bi-person-circle"></i>
+                    Guest User
+                </span>
+
+            </div>
+
+        </header>
+
+
+        <div class="content">
+
+            <section class="welcome-card">
+
+                <div class="welcome-text">
+
+                    <h1>
+                        <span>Analyze a Job Offer</span>
+                    </h1>
+
+                    <p>
+                        Enter the details of a job offer and let
+                        JobShield AI analyze it for potential fraud
+                        and suspicious activity.
+                    </p>
+
+                    <a href="/" class="btn-secondary-custom">
+                        <i class="bi bi-arrow-left"></i>
+                        Back to Dashboard
+                    </a>
+
+                </div>
+
+                <div class="welcome-icon">
+
+                    <div class="big-shield">
+                        <i class="bi bi-search"></i>
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="analysis-layout">
+
+
+                <!-- ANALYSIS FORM -->
+
+                <div class="analysis-card">
+
+                    <div class="section-title">
+
+                        <i class="bi bi-search"></i>
+
+                        <div>
+
+                            <h3>Job Offer Details</h3>
+
+                            <p>
+                                Enter the information below to check
+                                whether the job offer is genuine or suspicious.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <form id="jobForm">
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Job Title <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="job_title"
+                                    placeholder="e.g. Software Developer"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Company Name <span>*</span>
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="company"
+                                    placeholder="e.g. XYZ Technologies"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Job Description <span>*</span>
+                            </label>
+
+                            <textarea
+                                id="description"
+                                rows="6"
+                                placeholder="Paste the complete job description here..."
+                                required
+                            ></textarea>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Recruiter Email <span>*</span>
+                                </label>
+
+                                <input
+                                    type="email"
+                                    id="recruiter_email"
+                                    placeholder="recruiter@example.com"
+                                    required
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Company Website
+                                </label>
+
+                                <input
+                                    type="url"
+                                    id="website"
+                                    placeholder="https://company.com"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="row">
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Offered Salary
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="salary"
+                                    placeholder="e.g. ₹50,000 per month"
+                                >
+
+                            </div>
+
+
+                            <div class="col-md-6">
+
+                                <label>
+                                    Location
+                                </label>
+
+                                <input
+                                    type="text"
+                                    id="location"
+                                    placeholder="e.g. Hyderabad, India"
+                                >
+
+                            </div>
+
+                        </div>
+
+
+                        <button
+                            type="submit"
+                            class="analyze-button"
+                            id="analyzeButton"
+                        >
+
+                            <i class="bi bi-rocket-takeoff"></i>
+
+                            Analyze Now
+
+                        </button>
+
+                    </form>
+
+
+                    <!-- RESULT -->
+
+                    <div
+                        id="resultBox"
+                        class="result-box"
+                        style="display:none;"
+                    >
+
+                        <h3>
+                            Analysis Result
+                        </h3>
+
+                        <div class="result-score">
+
+                            <div>
+
+                                <span>Prediction</span>
+
+                                <h2 id="prediction">
+                                    -
+                                </h2>
+
+                            </div>
+
+                            <div>
+
+                                <span>Fraud Risk Score</span>
+
+                                <h2>
+                                    <span id="riskScore">0</span>%
+                                </h2>
+
+                            </div>
+
+                        </div>
+
+
+                        <h5>
+
+                            <i class="bi bi-exclamation-circle"></i>
+
+                            Analysis Explanation
+
+                        </h5>
+
+                        <ul id="reasons"></ul>
+
+                    </div>
+
+                </div>
+
+
+                <!-- INFORMATION -->
+
+                <div class="how-card">
+
+                    <h3>
+
+                        <i class="bi bi-shield-check"></i>
+
+                        What We Check
+
+                    </h3>
+
+
+                    <div class="step">
+
+                        <div class="step-icon blue-icon">
+                            <i class="bi bi-building"></i>
+                        </div>
+
+                        <div>
+
+                            <h5>Company Information</h5>
+
+                            <p>
+                                We examine company-related information
+                                provided with the job offer.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-icon green-icon">
+                            <i class="bi bi-envelope"></i>
+                        </div>
+
+                        <div>
+
+                            <h5>Recruiter Details</h5>
+
+                            <p>
+                                Recruiter email and other details can
+                                help identify suspicious offers.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-icon orange-icon">
+                            <i class="bi bi-file-text"></i>
+                        </div>
+
+                        <div>
+
+                            <h5>Job Description</h5>
+
+                            <p>
+                                The job description is analyzed for
+                                suspicious patterns and warning signs.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="step">
+
+                        <div class="step-icon red-icon">
+                            <i class="bi bi-exclamation-triangle"></i>
+                        </div>
+
+                        <div>
+
+                            <h5>Fraud Indicators</h5>
+
+                            <p>
+                                The system looks for characteristics
+                                commonly associated with fraudulent
+                                job advertisements.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="info-box">
+
+                        <i class="bi bi-info-circle"></i>
+
+                        JobShield AI provides an AI-based prediction.
+                        Always verify important information through
+                        official company sources.
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <footer>
+
+                © 2026 JobShield AI. All rights reserved.
+
+            </footer>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
