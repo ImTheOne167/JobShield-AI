@@ -1,8 +1,26 @@
 from flask import Flask, render_template, request, jsonify
 import sqlite3
 import json
+import joblib
+from pathlib import Path
 
 app = Flask(__name__)
+
+
+# =========================================================
+# LOAD ML MODEL
+# =========================================================
+
+MODEL_DIR = Path(__file__).resolve().parent / "model"
+
+try:
+    ml_model = joblib.load(MODEL_DIR / "job_model.pkl")
+    ml_vectorizer = joblib.load(MODEL_DIR / "vectorizer.pkl")
+    ML_AVAILABLE = True
+except Exception:
+    ml_model = None
+    ml_vectorizer = None
+    ML_AVAILABLE = False
 
 
 # =========================================================
@@ -238,14 +256,48 @@ def analyze_job():
     description = data.get("description", "")
 
     # ------------------------------------------------
-    # BASIC INITIAL IMPLEMENTATION
-    # Later replace this with your ML model
+    # INITIAL RULE-BASED RISK SCORE
     # ------------------------------------------------
 
     risk_score = 10
     reasons = []
 
-    # Check recruiter email
+    # ------------------------------------------------
+    # ML MODEL PREDICTION
+    # ------------------------------------------------
+
+    ml_risk = 0
+
+    if ML_AVAILABLE:
+
+        # Combine information available from the website
+        # into text for the trained TF-IDF model.
+        ml_text = " ".join([
+            job_title,
+            company,
+            description,
+            location,
+            website,
+            salary
+        ])
+
+        try:
+            ml_features = ml_vectorizer.transform([ml_text])
+
+            # Probability of class 1 = fraudulent
+            class_probabilities = ml_model.predict_proba(ml_features)[0]
+
+            if 1 in ml_model.classes_:
+                fraud_index = list(ml_model.classes_).index(1)
+                ml_risk = class_probabilities[fraud_index] * 100
+
+        except Exception:
+            ml_risk = 0
+
+    # ------------------------------------------------
+    # RULE-BASED CHECK: RECRUITER EMAIL
+    # ------------------------------------------------
+
     free_email_domains = [
         "gmail.com",
         "yahoo.com",
@@ -261,7 +313,10 @@ def analyze_job():
             "Recruiter is using a free email service instead of an official company domain."
         )
 
-    # Check suspicious keywords
+    # ------------------------------------------------
+    # RULE-BASED CHECK: SUSPICIOUS KEYWORDS
+    # ------------------------------------------------
+
     suspicious_words = [
         "registration fee",
         "security deposit",
@@ -288,17 +343,46 @@ def analyze_job():
             + ", ".join(detected_words)
         )
 
-    # Check website
+    # ------------------------------------------------
+    # RULE-BASED CHECK: WEBSITE
+    # ------------------------------------------------
+
     if not website:
         risk_score += 10
         reasons.append(
             "Company website was not provided."
         )
 
-    # Limit score
+    # Limit rule-based score
     risk_score = min(risk_score, 100)
 
-    # Classification
+    # ------------------------------------------------
+    # COMBINE RULE-BASED + ML RISK
+    # ------------------------------------------------
+
+    if ML_AVAILABLE:
+        risk_score = int(
+            (risk_score * 0.4) +
+            (ml_risk * 0.6)
+        )
+
+        # Add ML explanation when the model detects
+        # a relatively high fraud probability.
+        if ml_risk >= 70:
+            reasons.append(
+                "The machine learning model estimated a high probability of a fraudulent job posting."
+            )
+        elif ml_risk >= 40:
+            reasons.append(
+                "The machine learning model detected some characteristics associated with fraudulent job postings."
+            )
+
+    risk_score = min(max(risk_score, 0), 100)
+
+    # ------------------------------------------------
+    # FINAL CLASSIFICATION
+    # ------------------------------------------------
+
     if risk_score >= 60:
         prediction = "Fake"
     elif risk_score >= 30:
